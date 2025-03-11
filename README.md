@@ -1,0 +1,1 @@
+## Данный учебный проект создан по курсу <a href="https://stepik.org/course/114288/syllabus">"Django, потанцуем?"</a> 
