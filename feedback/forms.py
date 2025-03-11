@@ -1,13 +1,7 @@
 from django import forms
 from .models import Feedback
+from django.core.exceptions import ValidationError
 
-# class FeedbackForm(forms.Form):
-#     name = forms.CharField(min_length=2, max_length=7,
-#                            error_messages={'min_length': 'Слишком короткое имя', 'max_length': 'Слишком длинное имя', 'required': 'Обязательное поле'},
-#                            widget=forms.TextInput(attrs={'placeholder': 'Ваше имя'}), label='Имя')
-#     surname = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'placeholder': 'Ваша фамилия'}))
-#     feedback = forms.CharField(label='Отзыв', widget=forms.Textarea(attrs={'rows': 3, 'cols': 21}))
-#     rating = forms.IntegerField(label='Рейтинг', min_value=1, max_value=10)
 
 class FeedbackForm(forms.ModelForm):
     class Meta:
@@ -30,9 +24,22 @@ class FeedbackForm(forms.ModelForm):
                 'max_length': 'Слишком длинная фамилия',
                 'required': 'Обязательное поле',
             },
+            'rating': {
+                'min_value': 'Слишком низкий рейтинг',
+                'max_value': 'Слишком высокий рейтинг',
+                'required': 'Обязательное поле',
+            },
+
         }
         widgets = {
             'feedback': forms.Textarea(attrs={'rows': 3, 'cols': 21}),
             'name': forms.TextInput(attrs={'placeholder': 'Ваше имя'}),
-            'surname': forms.TextInput(attrs={'placeholder': 'Ваша фамилия'})
-                }
+            'surname': forms.TextInput(attrs={'placeholder': 'Ваша фамилия'}),
+            'rating': forms.NumberInput(attrs={'min': 1, 'max': 10})
+        }
+
+    def clean_rating(self):
+        rating = self.cleaned_data['rating']
+        if rating < 1 or rating > 10:
+            raise ValidationError('Рейтинг должен быть от 1 до 10.')
+        return rating
