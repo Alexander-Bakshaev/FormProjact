@@ -1,0 +1,82 @@
+.feedback-table {
+    width: auto; /* Ширина таблицы будет определяться её содержимым */
+    max-width: 80%; /* Максимальная ширина таблицы (можно настроить) */
+    margin: 20px auto; /* Центрирование таблицы на странице */
+    border-collapse: collapse;
+}
+
+.feedback-table th, .feedback-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.feedback-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Стили для строк таблицы при наведении */
+.feedback-table tbody tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.feedback-table tbody tr:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+.feedback-table tbody tr:hover td {
+    color: #007bff;
+}
+
+.feedback-table td.feedback-cell {
+    max-width: 500px; /* Максимальная ширина ячейки */
+    white-space: nowrap; /* Запрет переноса текста на новую строку */
+    overflow: hidden; /* Скрытие текста, который не помещается */
+    text-overflow: ellipsis; /* Добавление многоточия в конце */
+}
+
+.feedback-detail {
+    background-color: #f9f9f9; /* Фон блока */
+    padding: 20px; /* Внутренние отступы */
+    border: 1px solid #ddd; /* Граница блока */
+    border-radius: 8px; /* Закругленные углы */
+    max-width: 600px; /* Максимальная ширина блока */
+    margin: 20px auto; /* Центрирование блока */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+.feedback-detail p {
+    margin: 10px 0; /* Отступы для абзацев */
+    font-size: 16px; /* Размер текста */
+    line-height: 1.5; /* Межстрочный интервал */
+}
+
+.feedback-detail strong {
+    color: #333; /* Цвет для выделения текста */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    height: 100px; /* Высота контейнера (можно настроить) */
+}
+
+/* Стили для кнопки */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Синий цвет фона */
+    color: white; /* Белый текст */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 5px; /* Закругляем углы */
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Темно-синий цвет при наведении */
+}
+

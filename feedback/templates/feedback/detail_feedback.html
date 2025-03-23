@@ -1,0 +1,17 @@
+{% extends 'feedback/base.html' %}
+{% load static %}
+
+{% block title %} Отзыв {% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'feedback/styles.css' %}">
+    <h2>Детальная информация об отзыве</h2>
+    <div class="feedback-detail">
+        <p><strong>Автор:</strong> {{ feedback.name }} {{ feedback.surname }}</p>
+        <p><strong>Отзыв:</strong> {{ feedback.feedback }}</p>
+        <p><strong>Рейтинг:</strong> {{ feedback.rating }}</p>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'list_feedback' %}" class="button">Вернуться к списку отзывов</a>
+    </div>
+{% endblock %}
