@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import FeedbackForm
 from .models import Feedback
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic import ListView, DetailView, TemplateView, FormView, CreateView, UpdateView
 
 
 # class FeedbackView(View):
@@ -20,20 +20,32 @@ from django.views.generic import ListView, DetailView, TemplateView, FormView
 #         else:
 #             return render(request, 'feedback/feedback.html', context={'form': form})
 
-
-class FeedbackView(FormView):
+class FeedbackViewUpdate(UpdateView):
+    model = Feedback
     form_class = FeedbackForm
     template_name = 'feedback/feedback.html'
+    success_url = '/done'
 
 
-    def post(self, request):
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            form.save()
-            return HttpResponseRedirect('/done')
-        else:
-            return render(request, 'feedback/feedback.html', context={'form': form})
+class FeedbackView(CreateView):
+    model = Feedback
+    form_class = FeedbackForm
+    template_name = 'feedback/feedback.html'
+    success_url = '/done'
+
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super().form_valid(form)
+
+    # def post(self, request):
+    #     form = FeedbackForm(request.POST)
+    #     if form.is_valid():
+    #         print(form.cleaned_data)
+    #         form.save()
+    #         return HttpResponseRedirect('/done')
+    #     else:
+    #         return render(request, 'feedback/feedback.html', context={'form': form})
+
 
 class UpdateFeedbackView(View):
     def get(self, request, feedback_id):
@@ -80,6 +92,7 @@ class ListFeedBackView(ListView):
 class DetailFeedBackView(DetailView):
     template_name = 'feedback/detail_feedback.html'
     model = Feedback
+
 
 class DoneView(TemplateView):
     template_name = 'feedback/done.html'
